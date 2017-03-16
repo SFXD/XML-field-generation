@@ -18,9 +18,9 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
   // API Name
    // adds "Ref" before the "__c" in the case of a Lookup or MasterDetail to respect EMPAUA con
     if(strFieldType == 'MasterDetail'){
-      strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(toCamel(strFullName), toCamel(GetAPINameComp(strLabel)) + 'Ref__c'));} else if(strFieldType == 'Lookup') {
-      strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(toCamel(strFullName), toCamel(GetAPINameComp(strLabel)) + 'Ref__c'));} else {
-        strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(toCamel(strFullName), toCamel(GetAPINameComp(strLabel)) + '__c'));
+      strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + 'Ref__c'));} else if(strFieldType == 'Lookup') {
+      strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + 'Ref__c'));} else {
+        strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + '__c'));
     }
   // UI Label
   strXML = ConcatTag(strXML, 2, 'label', strLabel);
