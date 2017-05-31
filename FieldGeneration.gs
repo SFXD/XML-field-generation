@@ -144,11 +144,11 @@ function GetAPIName(strLabel) {
       strLabel = 'X' + strLabel;
     }
 
-    return Left(removeDiacritics(strLabel), 39) + '__c';
+    return Left(removeDiacritics(toCamel(strLabel), 39)) + '__c';
 
   }
   else {
-    return removeDiacritics(strLabel);
+    return removeDiacritics(toCamel(strLabel));
   } 
 }
 
@@ -157,18 +157,19 @@ function GetAPIName(strLabel) {
 function GetAPINameComp(strLabel) {
   // ensure the input isn't null, or an API Field Name already
   if(strLabel != '' && Right(strLabel, 3) != '__c'){
-    strLabel = MultiReplace(strLabel, /\W/g, '', /_{2,}/g, '_', /^_*/g, '', /_*$/g, '');
+    strLabel = MultiReplace(strLabel, /\W/g, '_', /_{2,}/g, '_', /^_*/g, '', /_*$/g, '');
     if(strLabel.search(/^\d/g) > -1){
       strLabel = 'X' + strLabel;
     }
 
-    return Left(removeDiacritics(strLabel), 39);
+    return Left(removeDiacritics(toCamel(strLabel), 39));
 
   }
   else {
-    return removeDiacritics(strLabel);
+    return removeDiacritics(toCamel(strLabel));
   } 
 }
+
 
 // MultiReplace() is handed three kinds of arguments:
 // arg0 is the original string;
