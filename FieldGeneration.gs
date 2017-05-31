@@ -36,11 +36,10 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
   // set other stuff to defaulty values based on type
   switch (strFieldType) {
     case 'Checkbox':
-      strXML = ConcatTag(strXML, 2, 'defaultValue', 'false');
     case 'Boolean':
       strFieldType = 'Checkbox';
       strXML = ConcatTag(strXML, 2, 'defaultValue', 'false');
-      break;
+       break;
         case 'Currency':
         strXML = ConcatTag(strXML, 2, 'precision', strTable);
       strXML = ConcatTag(strXML, 2, 'scale', 18-strTable);
