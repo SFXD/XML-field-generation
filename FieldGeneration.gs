@@ -16,12 +16,15 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
   // open field description
   strXML = ConcatTag(strXML, 1, 'fields');
   // API Name
-   // adds "Ref" before the "__c" in the case of a Lookup or MasterDetail to respect EMPAUA con
+   // adds "Ref" before the "__c" in the case of a Lookup or MasterDetail, and "Is" before the field name in the case of a checkbox to respect EMPAUA conventions
     if(strFieldType == 'MasterDetail'){
       strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + 'Ref__c'));} else if(strFieldType == 'Lookup') {
-      strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + 'Ref__c'));} else {
-        strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + '__c'));
+      strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + 'Ref__c'));} else if(strFieldType == 'Checkbox'){
+      strXML = ConcatTag(strXML, 2, 'fullName', 'Is' + HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + '__c'));} else if (strFieldType == 'Boolean') {
+      strXML = ConcatTag(strXML, 2, 'fullName', 'Is' + HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + '__c'));} else {
+      strXML = ConcatTag(strXML, 2, 'fullName', HideZLS(strFullName, toCamel(GetAPINameComp(strLabel)) + '__c'));
     }
+  
   // UI Label
   strXML = ConcatTag(strXML, 2, 'label', strLabel);
   
@@ -36,15 +39,17 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
   // set other stuff to defaulty values based on type
   switch (strFieldType) {
     case 'Checkbox':
+      strXML = ConcatTag(strXML, 2, 'defaultValue', 'false');
+      break;
     case 'Boolean':
       strFieldType = 'Checkbox';
       strXML = ConcatTag(strXML, 2, 'defaultValue', 'false');
-       break;
-        case 'Currency':
-        strXML = ConcatTag(strXML, 2, 'precision', strTable);
+      break;
+    case 'Currency':
+      strXML = ConcatTag(strXML, 2, 'precision', strTable);
       strXML = ConcatTag(strXML, 2, 'scale', 18-strTable);
       break;
-        case 'Date':
+    case 'Date':
         // don't do anything
         break;
     case 'Email':
@@ -144,11 +149,11 @@ function GetAPIName(strLabel) {
       strLabel = 'X' + strLabel;
     }
 
-    return Left(removeDiacritics(toCamel(strLabel), 39)) + '__c';
+    return Left(removeDiacritics(strLabel), 39) + '__c';
 
   }
   else {
-    return removeDiacritics(toCamel(strLabel));
+    return removeDiacritics(strLabel);
   } 
 }
 
@@ -157,19 +162,18 @@ function GetAPIName(strLabel) {
 function GetAPINameComp(strLabel) {
   // ensure the input isn't null, or an API Field Name already
   if(strLabel != '' && Right(strLabel, 3) != '__c'){
-    strLabel = MultiReplace(strLabel, /\W/g, '_', /_{2,}/g, '_', /^_*/g, '', /_*$/g, '');
+    strLabel = MultiReplace(strLabel, /\W/g, '', /_{2,}/g, '_', /^_*/g, '', /_*$/g, '');
     if(strLabel.search(/^\d/g) > -1){
       strLabel = 'X' + strLabel;
     }
 
-    return Left(removeDiacritics(toCamel(strLabel), 39));
+    return Left(removeDiacritics(strLabel), 39);
 
   }
   else {
-    return removeDiacritics(toCamel(strLabel));
+    return removeDiacritics(strLabel);
   } 
 }
-
 
 // MultiReplace() is handed three kinds of arguments:
 // arg0 is the original string;
