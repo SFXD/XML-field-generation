@@ -94,8 +94,8 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
         break;
     case 'Picklist':
       var picklistlines = strTable.split('\n');
-      strXML = ConcatTag(strXML, 2, 'valueSetDefinition');
       strXML = ConcatTag(strXML, 2, 'valueSet');
+      strXML = ConcatTag(strXML, 2, 'valueSetDefinition');
       strXML = ConcatTag(strXML, 2, 'sorted');
       strXML = strXML +'False';
       strXML = ConcatTag(strXML, 2, '/sorted');
@@ -105,8 +105,8 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
       strXML = ConcatTag(strXML, 4, 'default', 'false');
       strXML = ConcatTag(strXML, 3, '/value');        
       }
-      strXML = ConcatTag(strXML, 2, '/valueSet');
       strXML = ConcatTag(strXML, 2, '/valueSetDefinition');
+      strXML = ConcatTag(strXML, 2, '/valueSet');
       break;
         case 'Text':
         strXML = ConcatTag(strXML, 2, 'length', strTable);
