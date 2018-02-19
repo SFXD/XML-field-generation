@@ -94,14 +94,19 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
         break;
     case 'Picklist':
       var picklistlines = strTable.split('\n');
-      strXML = ConcatTag(strXML, 2, 'picklist');
+      strXML = ConcatTag(strXML, 2, 'valueSetDefinition');
+      strXML = ConcatTag(strXML, 2, 'valueSet');
+      strXML = ConcatTag(strXML, 2, 'sorted');
+      strXML = strXML +'False';
+      strXML = ConcatTag(strXML, 2, '/sorted');
       for(var i = 0;i < picklistlines.length;i++){
-      strXML = ConcatTag(strXML, 3, 'picklistValues');
+      strXML = ConcatTag(strXML, 3, 'value');
       strXML = ConcatTag(strXML, 4, 'fullName', picklistlines[i]);
       strXML = ConcatTag(strXML, 4, 'default', 'false');
-      strXML = ConcatTag(strXML, 3, '/picklistValues');        
+      strXML = ConcatTag(strXML, 3, '/value');        
       }
-      strXML = ConcatTag(strXML, 2, '/picklist');
+      strXML = ConcatTag(strXML, 2, '/valueSet');
+      strXML = ConcatTag(strXML, 2, '/valueSetDefinition');
       break;
         case 'Text':
         strXML = ConcatTag(strXML, 2, 'length', strTable);
