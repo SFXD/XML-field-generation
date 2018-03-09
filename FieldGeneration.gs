@@ -10,11 +10,12 @@
  var sheet = ss.getActiveSheet();
 
 // GetFieldXML() is the function that instantiates the XMLMaker() object
-function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
+function GetFieldXML(strLabel, strFullName, strFieldType, strTable, strDesc) {
   var strXML = '';
   
   // open field description
   strXML = ConcatTag(strXML, 1, 'fields');
+  strXML = ConcatTag(strXML, 2, 'description',strDesc);
   // API Name
    // adds "Ref" before the "__c" in the case of a Lookup or MasterDetail, and "Is" before the field name in the case of a checkbox to respect EMPAUA conventions
     if(strFieldType == 'MasterDetail'){
@@ -77,7 +78,7 @@ function GetFieldXML(strLabel, strFullName, strFieldType, strTable) {
         strXML = ConcatTag(strXML, 2, 'trackTrending', 'false');      
         strXML = ConcatTag(strXML, 2, 'writeRequiresMasterRead', 'false');      
       case 'Number':
-        strXML = ConcatTag(strXML, 2, 'precision', strTable);
+        strXML = ConcatTag(strXML, 2, 'precision', 16);
         strXML = ConcatTag(strXML, 2, 'scale', '0');
       break;
       case 'Decimal':
