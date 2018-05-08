@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/Version-0.0.10-blue.svg)
+![Version](https://img.shields.io/badge/Version-0.0.9-blue.svg)
 
 # **XML field generation**
 Original Developer @Ezra Kenigsberg http://www.ezrakenigsberg.com/ 
