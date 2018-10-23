@@ -14,28 +14,29 @@ THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMP
 Modifications made to Ezra Kenigsberg's version include Master-Detail handling, Picklist handling, API naming, to say a few. This is stilll a work in progress.
 
 ### instructions, sorta
-it is buggy and shit
-like lods of small bugs
-if the lighting field creator exists one day i'll use that myself instead of thistool
-bt in the meantime yeah my stuff works well
-short version is take the gscript
-put it in a google sheet
-then do these columns
-label, forcedapiname (optional, can be null), type, value, description
-label is the label, it will take stuff as-is
-forcedapiname takes stuff as is if specified. you can leave it as null otherwise so it calculates api name
-type is the type of field
-value is variables : if type is text, set the text length
-if thype is number it sets precision
-if type is decimal, it sets decimal number
-if lookup/maserdetail it sets the obejct to point to
-picklist, it sets values (one per line)
-Use the function `GetFieldXML(label,apiname, type, value, description)`
-then all you need to do is copy the xml
-put it in sublimer and emove the stupid double quotes that google adds
-and fix a minor couple of things :
-for lookpus it allways adds `__c` to the object even if it's astandard one, fix that
-for picklists there's a stupid carriage return in the the `<sorted>` node that can throw an error, if it does, just find the line of the picklist for `sorted`, see the carriage return and delete the extra one (it's easily seeable)
-and that's mostly it.
-once you push the fields remember to query the object, all fields, and profiles again via an IDE and to set visibility
-there's a regex for that on our wiki https://sfxd.github.io/article-regex.html
+
+it is buggy and shit,like loads of small bugs - if the lighting field creator exists one day i'll use that myself instead of thistool
+
+but in the meantime yeah my stuff works well
+
+- short version is take the gscript
+- put it in a google sheet
+- then do these columns
+- label, forcedapiname (optional, can be null), type, value, description
+- label is the label, it will take stuff as-is
+- forcedapiname takes stuff as is if specified. you can leave it as null otherwise so it calculates api name
+- type is the type of field
+- value is variables : if type is text, set the text length
+- if thype is number it sets precision
+- if type is decimal, it sets decimal number
+- if lookup/maserdetail it sets the obejct to point to
+- picklist, it sets values (one per line)
+- Use the function `GetFieldXML(label,apiname, type, value, description)`
+- then all you need to do is copy the xml
+- put it in sublimer and emove the stupid double quotes that google adds
+- and fix a minor couple of things :
+- for lookpus it allways adds `__c` to the object even if it's astandard one, fix that
+- for picklists there's a stupid carriage return in the the `<sorted>` node that can throw an error, if it does, just find the line of the picklist for `sorted`, see the carriage return and delete the extra one (it's easily seeable)
+- and that's mostly it.
+- once you push the fields remember to query the object, all fields, and profiles again via an IDE and to set visibility
+- there's a regex for that on our wiki https://sfxd.github.io/article-regex.html
