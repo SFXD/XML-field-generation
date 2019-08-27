@@ -1,5 +1,14 @@
 ![Version](https://img.shields.io/badge/Version-0.0.9-blue.svg)
 
+# Deprecated
+
+This code is now completely useless because Salesforce has released their Object Creator https://object-creator.salesforce.com
+Do not use my repo unless for some reason you REALLY want to deploy fields via API after hacking together the XML.
+Seriously.
+It's deprecated.
+Don't use it.
+
+
 # **XML field generation**
 Original Developer @Ezra Kenigsberg http://www.ezrakenigsberg.com/ 
 
